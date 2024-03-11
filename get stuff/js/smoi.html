@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Calculer prix de vente :</h1>
+    <form method="get">
+        <select name="type" id="type">
+            <option selected disabled>choisir type</option>
+            <option value="a" id="a">A</option>
+            <option value="b" id="b">B</option>
+            <option value="autres" id="autres">Autres</option>
+        </select>
+
+        <input type="number" id="n" placeholder="Quantite" >
+
+        <input type="number" id="p" placeholder="prix unitaire"><br>
+
+        <button type="button" onclick="calculate()">Calculer prix de vent</button>
+        <div id="result"></div>
+
+        <script>
+            function calculate() {
+                let type = document.getElementById('type').value;
+                let n = parseFloat(document.getElementById('n').value);
+                let p = parseFloat(document.getElementById('p').value);
+                let shipping = 50;
+                let result = 0;
+
+                if (isNaN(n) || isNaN(p)) {
+                    document.getElementById('result').innerHTML = 'Please enter valid numbers';
+                    return;
+                }
+
+                if (type === 'a') {
+                    let t = n * p;
+
+                    if (n < 10) {
+                        result = t;
+                    } else if (n >= 10 && n < 50) {
+                        let discount = (n * p) * 0.1;
+                        result = t - discount;
+                    } else if (n >= 50) {
+                        result = (n - Math.floor(n / 10)) * p;
+                    }
+                } else if (type === 'b') {
+                    let t = n * p;
+                    if (n < 30) {
+                        result = t + shipping;
+                    } else {
+                        result = t;
+                    }
+                } else if (type === 'autres') {
+                    result = n * p;
+                }
+
+                // Display the result
+                document.getElementById('result').innerHTML = 'Resultat : ' + result;
+            }
+        </script>
+    </form>
+</body>
+</html>

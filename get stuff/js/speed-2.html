@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <label for="speed">put the speed in (km/h)</label>
+      <input type="number" id="speedInput" />
+      <button onclick="speedCheck()">check</button>
+    </div>
+    <div id="result"></div>
+
+    <script>
+        function speedCheck(){
+            let speed =document.querySelector('#speedInput').value;
+            if (isNaN(speed)){
+                document.querySelector('#result').innerHTML = 'this is not a number pls put the corect number';
+                return;
+            }
+
+            const speedLimit = 100 
+            const penaltyPoints = ((speed - speedLimit) / 5)
+
+
+            if (speed <= speedLimit ){  
+                document.querySelector('#result').innerHTML = 'its okey no penalite ';
+            }
+            else if (penaltyPoints <= 10){
+                document.querySelector('#result').innerHTML = `above speed limit you have penalty ${penaltyPoints} `
+            }
+
+            else {
+                document.querySelector('#result').innerHTML = " Suspension de permis de conduite. "
+            }
+   
+        }
+
+
+    </script>
+  </body>
+</html>
